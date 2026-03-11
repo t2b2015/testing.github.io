@@ -3,10 +3,9 @@
 <head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Home Questionnaire</title>
+  <title>Home Questionnaire</title> 
 
-
-  <!-- Google Fonts for a modern, clean look -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +23,7 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6f8;
-      color: #121c2d; /* Twilio dark text */
+      color: #121c2d;
       margin: 0;
       padding: 20px;
       display: flex;
@@ -88,9 +87,11 @@
       font-size: 14px;
     }
 
+    /* Added 'select' here to style the dropdown */
     input[type="text"], 
     input[type="email"], 
-    textarea {
+    textarea,
+    select {
       width: 100%;
       padding: 12px;
       border: 1px solid #8f9bb3;
@@ -99,10 +100,12 @@
       font-size: 14px;
       box-sizing: border-box;
       transition: all 0.2s;
+      background-color: white;
     }
 
     input:focus, 
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       outline: none;
       border-color: #52BD94; /* Segment Green */
       box-shadow: 0 0 0 3px rgba(82, 189, 148, 0.2);
@@ -123,18 +126,16 @@
     }
 
     input[type="submit"]:hover {
-      background-color: #D12239; /* Darker Twilio Red */
+      background-color: #D12239;
     }
   </style>
 </head> 
 <body> 
 
   <div class="form-container">
-    <!-- Travel Cover Image from Unsplash -->
     <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Travel Header" class="hero-image">
     
     <div class="form-content">
-      <!-- Twilio Segment Logos -->
       <div class="logos">
         <img src="https://www.vectorlogo.zone/logos/segment/segment-ar21.svg" alt="Segment Logo">
         <span style="color:#8f9bb3;">+</span>
@@ -144,7 +145,20 @@
       <h1>What is your favorite place to travel?</h1> 
       <p class="subtitle">I am building a directory of the sweetest travel destinations.</p>  
 
-      <form name="travel" onsubmit="identify(event)">
+      <form name="travel" onsubmit="identifyAndTrack(event)">
+        
+        <!-- NEW DROPDOWN QUESTION -->
+        <div class="form-group">
+          <label for="travelStyle">What is your preferred travel style?</label>
+          <select id="travelStyle" name="travelStyle" required>
+            <option value="" disabled selected>Select an option...</option>
+            <option value="Adventure">Adventure & Outdoors</option>
+            <option value="Relaxing">Relaxing & Beach</option>
+            <option value="Cultural">Cultural & Historical</option>
+            <option value="Foodie">Food & Culinary</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="destination">What is your favorite travel destination?</label>
           <input id="destination" name="destination" required type="text" placeholder="e.g. Kyoto, Japan"/> 
@@ -152,7 +166,7 @@
 
         <div class="form-group">
           <label for="details">Any recommendations (cool things to do, places to visit or restaurants)?</label>
-          <textarea id="details" name="details" required rows="5" placeholder="Share your best tips..."></textarea> 
+          <textarea id="details" name="details" required rows="4" placeholder="Share your best tips..."></textarea> 
         </div>
 
         <div class="form-group">
@@ -170,31 +184,35 @@
     </div>
   </div>
 
-  <!-- Segment Identify Logic -->
+  <!-- Segment Identify & Track Logic -->
   <script type="text/javascript">
-    function identify(e){
+    function identifyAndTrack(e){
       e.preventDefault();
       var form = e.target;
+      
+      // Get all values from the form
       var email = form["email"].value;
       var fullname = form["fullname"].value;
       var destination = form["destination"].value;
       var details = form["details"].value;
+      var travelStyle = form["travelStyle"].value; // The new dropdown!
       
-      var user = {
-        email: email, 
-        name: fullname, 
-        destination: destination, 
-        details: details
-      };
-      
-      analytics.identify('1234', {
-        email: email, 
-        name: fullname
+      // 1. IDENTIFY CALL
+      // We use their Email as the unique User ID, and pass their Name & Travel Style as Traits.
+      analytics.identify(email, {
+        name: fullname,
+        email: email,
+        travel_style: travelStyle
       });
       
-      analytics.track('destination submitted', user, function() {
-        // Optional: show an alert before reloading
-        alert("Thanks for submitting!"); 
+      // 2. TRACK CALL
+      // We track the specific event they performed and the properties related to that event.
+      analytics.track('Destination Submitted', {
+        destination_name: destination, 
+        destination_details: details,
+        travel_style: travelStyle
+      }, function() {
+        alert("Thanks for submitting! Check your Segment Debugger."); 
         window.location.href = "";
       });
     }
@@ -205,22 +223,20 @@
   <!-- =============================== -->
   <style>
     #chat-widget { position: fixed; bottom: 20px; right: 20px; width: 320px; border-radius: 12px; background: white; box-shadow: 0 8px 24px rgba(0,0,0,0.15); font-family: 'Inter', sans-serif; display: none; z-index: 9999; overflow: hidden; border: 1px solid #ddd; }
-    #chat-header { background: #0263e0; /* Segment Blue */ color: white; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
+    #chat-header { background: #0263e0; color: white; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
     #chat-messages { height: 280px; overflow-y: auto; padding: 15px; font-size: 14px; background: #f9f9f9; display: flex; flex-direction: column; gap: 8px; }
     #chat-input-area { display: flex; padding: 10px; border-top: 1px solid #ddd; background: white; }
     #chat-input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; outline: none; font-family: 'Inter', sans-serif; }
     #chat-input:focus { border-color: #52BD94; }
     #chat-send { margin-left: 8px; padding: 8px 15px; background: #0263e0; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
-    #chat-toggle { position: fixed; bottom: 20px; right: 20px; background: #F22F46; /* Twilio Red */ color: white; border: none; padding: 14px 24px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 12px rgba(242, 47, 70, 0.4); z-index: 9998; font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif; transition: transform 0.2s; }
+    #chat-toggle { position: fixed; bottom: 20px; right: 20px; background: #F22F46; color: white; border: none; padding: 14px 24px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 12px rgba(242, 47, 70, 0.4); z-index: 9998; font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif; transition: transform 0.2s; }
     #chat-toggle:hover { transform: translateY(-2px); }
     .msg-user { color: #fff; background: #0263e0; padding: 10px 14px; border-radius: 14px 14px 0 14px; text-align: right; width: fit-content; margin-left: auto; max-width: 80%; }
     .msg-bot { color: #333; background: #e5e5ea; padding: 10px 14px; border-radius: 14px 14px 14px 0; text-align: left; width: fit-content; margin-right: auto; max-width: 80%; }
   </style>
 
-  <!-- The Chat Button -->
   <button id="chat-toggle" onclick="document.getElementById('chat-widget').style.display='block'; this.style.display='none';">💬 Chat with us</button>
 
-  <!-- The Chat Window -->
   <div id="chat-widget">
     <div id="chat-header" onclick="document.getElementById('chat-widget').style.display='none'; document.getElementById('chat-toggle').style.display='block';">
       <span>Travel Bot</span>
@@ -243,12 +259,10 @@
 
       let messages = document.getElementById("chat-messages");
       
-      // 1. Show User Message
       messages.innerHTML += `<div class="msg-user">${text}</div>`;
       input.value = "";
       messages.scrollTop = messages.scrollHeight; 
 
-      // 2. Determine Bot Response
       setTimeout(() => {
         let reply = "I'm just a simple bot, but my creator works at Twilio Segment!";
         let lowerText = text.toLowerCase();
@@ -258,7 +272,6 @@
         if (lowerText.includes("segment")) reply = "Segment is the world's leading Customer Data Platform (CDP).";
         if (lowerText.includes("travel") || lowerText.includes("destination")) reply = "We are collecting the best places to travel. Fill out the form to add yours!";
 
-        // 3. Show Bot Message
         messages.innerHTML += `<div class="msg-bot">${reply}</div>`;
         messages.scrollTop = messages.scrollHeight;
       }, 600); 
