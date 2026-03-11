@@ -1,122 +1,271 @@
 <!DOCTYPE html> 
-<html> 
+<html lang="en"> 
 <head> 
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Questionnaire</title> 
 
-    <title>Home Questionnaire<span id="selection-marker-1" class="redactor-selection-marker"></span></title> 
-  
-         <script>
-          !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="SWOQZWQxYj6UYQ7Tr67HJvKmHCzjBoML";;analytics.SNIPPET_VERSION="4.15.3";
-          analytics.load("SWOQZWQxYj6UYQ7Tr67HJvKmHCzjBoML");
-          analytics.page();
-          }}();
-        </script>
+  <!-- Google Fonts for a modern, clean look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Segment Snippet -->
+  <script>
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="SWOQZWQxYj6UYQ7Tr67HJvKmHCzjBoML";;analytics.SNIPPET_VERSION="4.15.3";
+    analytics.load("SWOQZWQxYj6UYQ7Tr67HJvKmHCzjBoML");
+    analytics.page();
+    }}();
+  </script>
+
+  <!-- Modern Styling -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6f8;
+      color: #121c2d; /* Twilio dark text */
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .form-content {
+      padding: 40px;
+    }
+
+    .logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logos img {
+      height: 30px;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 0;
+      color: #121c2d;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: #606b85;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input[type="text"], 
+    input[type="email"], 
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #8f9bb3;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: all 0.2s;
+    }
+
+    input:focus, 
+    textarea:focus {
+      outline: none;
+      border-color: #52BD94; /* Segment Green */
+      box-shadow: 0 0 0 3px rgba(82, 189, 148, 0.2);
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #F22F46; /* Twilio Red */
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #D12239; /* Darker Twilio Red */
+    }
+  </style>
 </head> 
 <body> 
-<h1>What is your favorite place to travel?</h1> 
-<p>I am building a directory of the sweetest travel destinations.</p>  
-<form name="travel" onsubmit="identify(event)">
-     What is your favorite travel destination?
-    <input name="destination" required="" size="81" type="text"/> 
-    <br><br><br> 
-    Any recommendations (cool things to do, places to visit or restaurants to eat)? 
-    <br><br> 
-    <textarea cols="81" name="details" required="" rows="10">
-    </textarea> 
-    <br><br> 
-    Name: <input name="fullname" required="" size="75" type="text"/> 
-    <br><br> 
-    Email: <input name="email" required="" size="75" type="email"/> 
-    <br><br>
-    <input name="submit" type="submit" value="submit"/>
-</form> 
 
-    <script type="text/javascript">
-      function identify(e){
-        e.preventDefault();
-        var form = e.target;
-        var email = form["email"].value;
-        var fullname = form["fullname"].value;
-        var destination = form["destination"].value;
-        var details = form["details"].value;
-        var user = {
-            email: email, 
-            name: fullname, 
-            destination: destination, 
-            details: details
-        };
-        analytics.identify('1234', {
-            email: email, 
-            name: fullname
-        });
-        analytics.track('destination submitted', user, function() {
-            window.location.href = "";
-        });
-      }
-
-        <!-- SIMPLE CHATBOT START -->
-<style>
-  #chat-widget { position: fixed; bottom: 20px; right: 20px; width: 300px; border-radius: 10px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: sans-serif; display: none; z-index: 9999; }
-  #chat-header { background: #2b3137; color: white; padding: 15px; border-radius: 10px 10px 0 0; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; }
-  #chat-messages { height: 250px; overflow-y: auto; padding: 10px; font-size: 14px; background: #f9f9f9; }
-  #chat-input-area { display: flex; padding: 10px; border-top: 1px solid #ddd; background: white; border-radius: 0 0 10px 10px; }
-  #chat-input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 5px; outline: none; }
-  #chat-send { margin-left: 8px; padding: 8px 12px; background: #2b3137; color: white; border: none; border-radius: 5px; cursor: pointer; }
-  #chat-toggle { position: fixed; bottom: 20px; right: 20px; background: #2b3137; color: white; border: none; padding: 12px 20px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 9998; font-size: 16px; }
-  .msg-user { color: #000; background: #dcf8c6; padding: 8px; border-radius: 10px; margin-bottom: 5px; text-align: right; width: fit-content; margin-left: auto; }
-  .msg-bot { color: #000; background: #e5e5ea; padding: 8px; border-radius: 10px; margin-bottom: 5px; text-align: left; width: fit-content; margin-right: auto; }
-</style>
-
-<!-- The Chat Button -->
-<button id="chat-toggle" onclick="document.getElementById('chat-widget').style.display='block'; this.style.display='none';">💬 Chat with us</button>
-
-<!-- The Chat Window -->
-<div id="chat-widget">
-  <div id="chat-header" onclick="document.getElementById('chat-widget').style.display='none'; document.getElementById('chat-toggle').style.display='block';">
-    <span>My Website Bot</span>
-    <span>✖</span>
-  </div>
-  <div id="chat-messages">
-    <div class="msg-bot">Hello! How can I help you today?</div>
-  </div>
-  <div id="chat-input-area">
-    <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendChat()">
-    <button id="chat-send" onclick="sendChat()">Send</button>
-  </div>
-</div>
-
-<script>
-  function sendChat() {
-    let input = document.getElementById("chat-input");
-    let text = input.value.trim();
-    if (!text) return;
-
-    let messages = document.getElementById("chat-messages");
+  <div class="form-container">
+    <!-- Travel Cover Image from Unsplash -->
+    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Travel Header" class="hero-image">
     
-    // 1. Show User Message
-    messages.innerHTML += `<div class="msg-user">${text}</div>`;
-    input.value = "";
-    messages.scrollTop = messages.scrollHeight; // Scroll to bottom
+    <div class="form-content">
+      <!-- Twilio Segment Logos -->
+      <div class="logos">
+        <img src="https://www.vectorlogo.zone/logos/segment/segment-ar21.svg" alt="Segment Logo">
+        <span style="color:#8f9bb3;">+</span>
+        <img src="https://www.vectorlogo.zone/logos/twilio/twilio-ar21.svg" alt="Twilio Logo">
+      </div>
 
-    // 2. Determine Bot Response
-    setTimeout(() => {
-      let reply = "I'm a simple bot. I don't know the answer to that yet!";
-      let lowerText = text.toLowerCase();
+      <h1>What is your favorite place to travel?</h1> 
+      <p class="subtitle">I am building a directory of the sweetest travel destinations.</p>  
+
+      <form name="travel" onsubmit="identify(event)">
+        <div class="form-group">
+          <label for="destination">What is your favorite travel destination?</label>
+          <input id="destination" name="destination" required type="text" placeholder="e.g. Kyoto, Japan"/> 
+        </div>
+
+        <div class="form-group">
+          <label for="details">Any recommendations (cool things to do, places to visit or restaurants)?</label>
+          <textarea id="details" name="details" required rows="5" placeholder="Share your best tips..."></textarea> 
+        </div>
+
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input id="fullname" name="fullname" required type="text" placeholder="Jane Doe"/> 
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" required type="email" placeholder="jane@example.com"/> 
+        </div>
+
+        <input name="submit" type="submit" value="Submit Destination"/>
+      </form> 
+    </div>
+  </div>
+
+  <!-- Segment Identify Logic -->
+  <script type="text/javascript">
+    function identify(e){
+      e.preventDefault();
+      var form = e.target;
+      var email = form["email"].value;
+      var fullname = form["fullname"].value;
+      var destination = form["destination"].value;
+      var details = form["details"].value;
       
-      // Customize your bot's answers here!
-      if (lowerText.includes("hello") || lowerText.includes("hi")) reply = "Hi there! Welcome to testing.github.io!";
-      if (lowerText.includes("help")) reply = "I can help you navigate the site. What are you looking for?";
-      if (lowerText.includes("contact")) reply = "You can reach the site owner on GitHub!";
-      if (lowerText.includes("github")) reply = "This site is proudly hosted on GitHub Pages.";
+      var user = {
+        email: email, 
+        name: fullname, 
+        destination: destination, 
+        details: details
+      };
+      
+      analytics.identify('1234', {
+        email: email, 
+        name: fullname
+      });
+      
+      analytics.track('destination submitted', user, function() {
+        // Optional: show an alert before reloading
+        alert("Thanks for submitting!"); 
+        window.location.href = "";
+      });
+    }
+  </script>
 
-      // 3. Show Bot Message
-      messages.innerHTML += `<div class="msg-bot">${reply}</div>`;
-      messages.scrollTop = messages.scrollHeight;
-    }, 600); // 0.6 second delay to feel like a real chat
-  }
-</script>
-<!-- SIMPLE CHATBOT END -->
+  <!-- =============================== -->
+  <!--       SIMPLE CHATBOT START      -->
+  <!-- =============================== -->
+  <style>
+    #chat-widget { position: fixed; bottom: 20px; right: 20px; width: 320px; border-radius: 12px; background: white; box-shadow: 0 8px 24px rgba(0,0,0,0.15); font-family: 'Inter', sans-serif; display: none; z-index: 9999; overflow: hidden; border: 1px solid #ddd; }
+    #chat-header { background: #0263e0; /* Segment Blue */ color: white; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
+    #chat-messages { height: 280px; overflow-y: auto; padding: 15px; font-size: 14px; background: #f9f9f9; display: flex; flex-direction: column; gap: 8px; }
+    #chat-input-area { display: flex; padding: 10px; border-top: 1px solid #ddd; background: white; }
+    #chat-input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; outline: none; font-family: 'Inter', sans-serif; }
+    #chat-input:focus { border-color: #52BD94; }
+    #chat-send { margin-left: 8px; padding: 8px 15px; background: #0263e0; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
+    #chat-toggle { position: fixed; bottom: 20px; right: 20px; background: #F22F46; /* Twilio Red */ color: white; border: none; padding: 14px 24px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 12px rgba(242, 47, 70, 0.4); z-index: 9998; font-size: 16px; font-weight: 600; font-family: 'Inter', sans-serif; transition: transform 0.2s; }
+    #chat-toggle:hover { transform: translateY(-2px); }
+    .msg-user { color: #fff; background: #0263e0; padding: 10px 14px; border-radius: 14px 14px 0 14px; text-align: right; width: fit-content; margin-left: auto; max-width: 80%; }
+    .msg-bot { color: #333; background: #e5e5ea; padding: 10px 14px; border-radius: 14px 14px 14px 0; text-align: left; width: fit-content; margin-right: auto; max-width: 80%; }
+  </style>
 
-    
+  <!-- The Chat Button -->
+  <button id="chat-toggle" onclick="document.getElementById('chat-widget').style.display='block'; this.style.display='none';">💬 Chat with us</button>
+
+  <!-- The Chat Window -->
+  <div id="chat-widget">
+    <div id="chat-header" onclick="document.getElementById('chat-widget').style.display='none'; document.getElementById('chat-toggle').style.display='block';">
+      <span>Travel Bot</span>
+      <span>✖</span>
+    </div>
+    <div id="chat-messages">
+      <div class="msg-bot">Hello! Got any questions about Segment, Twilio, or travel?</div>
+    </div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendChat()">
+      <button id="chat-send" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendChat() {
+      let input = document.getElementById("chat-input");
+      let text = input.value.trim();
+      if (!text) return;
+
+      let messages = document.getElementById("chat-messages");
+      
+      // 1. Show User Message
+      messages.innerHTML += `<div class="msg-user">${text}</div>`;
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight; 
+
+      // 2. Determine Bot Response
+      setTimeout(() => {
+        let reply = "I'm just a simple bot, but my creator works at Twilio Segment!";
+        let lowerText = text.toLowerCase();
+        
+        if (lowerText.includes("hello") || lowerText.includes("hi")) reply = "Hi there! Feel free to submit your favorite travel spot.";
+        if (lowerText.includes("twilio")) reply = "Twilio is an amazing customer engagement platform!";
+        if (lowerText.includes("segment")) reply = "Segment is the world's leading Customer Data Platform (CDP).";
+        if (lowerText.includes("travel") || lowerText.includes("destination")) reply = "We are collecting the best places to travel. Fill out the form to add yours!";
+
+        // 3. Show Bot Message
+        messages.innerHTML += `<div class="msg-bot">${reply}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 600); 
+    }
+  </script>
+  <!-- =============================== -->
+  <!--        SIMPLE CHATBOT END       -->
+  <!-- =============================== -->
+
 </body> 
 </html>
